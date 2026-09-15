@@ -1,0 +1,17 @@
+run_utc,as_of,signal,label,tab,book,horizon_weeks,condition,value,chg,pct,z,band,fires,active,trigger_date,hold_until,days_left,position,last_print,stale_days,expected_stale_days
+2026-09-15T12:52:49Z,2026-09-15,iorb_vol,SOFR-IORB spread 12w vol-scaled,main,long_short,2,pct_le 0.2,-0.03,0.09571,0.581373,-0.0257,short,False,True,2026-09-08,2026-09-21,6,long,2026-09-14,1,4
+2026-09-15T12:52:49Z,2026-09-15,nfci_z52,NFCI 52w z,main,risk_off,4,pct_ge 0.8,-0.564,-1.569791,0.118206,-1.095128,buy,False,False,2022-07-26,2022-08-22,,long,2026-09-04,11,12
+2026-09-15T12:52:49Z,2026-09-15,realyield_vol,5Y real yield 12w vol-scaled,main,risk_off,1,pct_ge 0.9,2.38,1.19235,0.82351,0.815378,high risk,False,False,2026-08-07,2026-08-13,,long,2026-09-11,4,4
+2026-09-15T12:52:49Z,2026-09-15,dxy_z52,DXY 52w z,main,risk_off,12,pct_ge 0.9,99.482617,0.346503,0.490177,0.057714,buy,False,True,2026-07-29,2026-10-20,35,short,2026-09-14,1,4
+2026-09-15T12:52:49Z,2026-09-15,retail_accel,Retail sales accel 12w,main,risk_off,5,pct_ge 0.8,229439.0,-0.013231,0.205305,-0.220968,buy,False,False,2026-06-05,2026-07-09,,long,2026-07-01,76,80
+2026-09-15T12:52:49Z,2026-09-15,ig10y_vol,IG-10Y 12w vol-scaled,main,long,1,pct_le 0.2,0.75,0.477038,0.687623,0.34058,flat,False,False,2026-06-24,2026-06-30,,flat,2026-09-11,4,4
+2026-09-15T12:52:49Z,2026-09-15,dxy_d12,DXY 12w change,main,long,12,z_le -1,99.482617,-1.793463,0.238048,-0.622699,approaching,False,False,2026-02-13,2026-05-07,,flat,2026-09-14,1,4
+2026-09-15T12:52:49Z,2026-09-15,ccc_d12,CCC OAS 12w change,main,long,1,pct_le 0.2,10.76,1.29,0.886694,0.765909,flat,False,False,2025-07-24,2025-07-30,,flat,2026-09-11,4,4
+2026-09-15T12:52:49Z,2026-09-15,nfci_d12,NFCI 12w change,main,long,12,pct_le 0.2,-0.564,-0.056,0.252128,-0.403027,approaching,False,False,2025-08-19,2025-11-10,,flat,2026-09-04,11,12
+2026-09-15T12:52:49Z,2026-09-15,ig_oas_d13,IG OAS 13w change,research,long,8,pct_le 0.2,0.8,0.07,0.775952,0.272032,flat,False,False,2026-06-30,2026-08-24,,flat,2026-09-11,4,4
+2026-09-15T12:52:49Z,2026-09-15,hy10y_d12,HY-10Y 12w change,research,long,12,pct_le 0.2,2.45,0.04,0.611657,0.075509,flat,False,False,2026-06-23,2026-09-14,,flat,2026-09-11,4,4
+2026-09-15T12:52:49Z,2026-09-15,netliq_pct13,Net liquidity 13w change,research,long,10,pct_ge 0.8,5855864.0,-0.006924,0.454813,-0.206994,flat,False,True,2026-07-29,2026-10-06,21,long,2026-09-09,6,9
+2026-09-15T12:52:49Z,2026-09-15,netliq_z13,Net liquidity 13w z,research,risk_off,10,z_le -1,5855864.0,-0.006924,0.454813,-0.206994,buy,False,False,2025-11-26,2026-02-03,,long,2026-09-09,6,9
+2026-09-15T12:52:49Z,2026-09-15,dvol_d13,BTC DVOL 13w change,research,long,12,pct_le 0.2,39.75,2.08,0.647619,0.359239,flat,False,False,2026-06-19,2026-09-10,,flat,2026-09-15,0,4
+2026-09-15T12:52:49Z,2026-09-15,vix_d12,VIX 12w change (MOVE substitute),research,risk_off,12,pct_ge 0.9,15.84,-1.44,0.413883,-0.18053,buy,False,False,2026-04-08,2026-06-30,,long,2026-09-11,4,4
+2026-09-15T12:52:49Z,2026-09-15,realyield_d13,5Y real yield 13w change,research,risk_off,10,pct_ge 0.9,2.38,0.6,0.919777,1.354625,sell,True,True,2026-09-15,2026-11-23,69,short,2026-09-11,4,4
