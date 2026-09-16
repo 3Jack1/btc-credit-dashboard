@@ -27,30 +27,36 @@ z trigger unless a signal overrides it. The percentile is the gauge and the trig
 line on it: a risk-off signal whose hold has expired at a percentile of 0.7 is still high
 risk, and the lower the percentile the lower the risk.
 
+**gauge from** is the day that percentile began expanding -- 2015-01-01 unless the signal
+names the start of its own screen column, which is the history the screen ranked against.
+Every output row still begins at the dashboard's start; only the ranking history differs.
+On a trigger sitting at the 0.90 line this is not a detail: a shorter history lifts the
+upper tail, and on the dollar's 52-week z it moved twelve borderline weeks across the line.
+
 ## 2. Signals
 
-| signal | tab | book | H | trigger | warning from | transform | lookback | sources | seeded from | readable lag | first graded |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| `put_call_z6` **(disabled)** | main | risk_off | 8 | `z >= 2` | `z >= 1` | zroll_clip | 6 | _(no feed)_ | - | - | - |
-| `iorb_vol` | main | two_sided | 2 | `buy pct <= 0.4 (2w, traded 2w later); sell pct >= 0.9 (2w); between: hold` | `good < 0.6; hold < 0.8; risk < 0.9` | vol_scaled | 12 | SOFR + IORB x-1 | IORB | 1d / 0d | 2023-10-27 |
-| `nfci_z52` | main | risk_off | 4 | `pct >= 0.8` | `pct >= 0.7` | zroll_clip | 52 | NFCI | - | 5d | 2015-12-31 |
-| `realyield_vol` | main | risk_off | 1 | `pct >= 0.9` | `pct >= 0.8` | vol_scaled | 12 | DFII5 | 5Y Real Yield | 1d | 2015-12-31 |
-| `dxy_z52` | main | risk_off | 12 | `pct >= 0.9` | `pct >= 0.8` | zroll_clip | 52 | DXY | - | 0d | 2015-12-31 |
-| `retail_accel` | main | risk_off | 5 | `pct >= 0.8` | `pct >= 0.7` | accel | 12 | RRSFS | - | month end + 16d | 2015-12-31 |
-| `breakeven_level` **(disabled)** | main | risk_off | 1 | `pct >= 0.9` | `pct >= 0.8` | level | - | _(no feed)_ | - | - | - |
-| `hyg_logd12` **(disabled)** | main | long | 12 | `z >= 2` | `z >= 1` | logdiff | 12 | _(no feed)_ | - | - | - |
-| `ig10y_vol` | main | long | 1 | `pct <= 0.2` | `pct <= 0.3` | vol_scaled | 12 | BAMLC0A0CMEY + DGS10 x-1 | IG-10Y | 1d | 2015-12-31 |
-| `puell_z6` **(disabled)** | main | long_short | 12 | `pct >= 0.9` | `pct >= 0.8` | zroll_clip | 6 | _(no feed)_ | - | - | - |
-| `dxy_d12` | main | long | 12 | `z <= -1` | `z <= -0.5` | diff | 12 | DXY | - | 0d | 2015-12-31 |
-| `ccc_d12` | main | long | 1 | `pct <= 0.2` | `pct <= 0.3` | diff | 12 | BAMLH0A3HYC | CCC OAS | 1d | 2017-06-02 |
-| `nfci_d12` | main | long | 12 | `pct <= 0.2` | `pct <= 0.3` | diff | 12 | NFCI | - | 5d | 2015-12-31 |
-| `ig_oas_d13` | research | long | 8 | `pct <= 0.2` | `pct <= 0.3` | diff | 13 | BAMLC0A0CM | IG OAS | 1d | 2017-06-09 |
-| `hy10y_d12` | research | long | 12 | `pct <= 0.2` | `pct <= 0.3` | diff | 12 | BAMLH0A0HYM2EY + DGS10 x-1 | HY-10Y | 1d | 2015-12-31 |
-| `netliq_pct13` | research | long | 10 | `pct >= 0.8` | `pct >= 0.7` | pctdiff | 13 | WALCL + WTREGEN x-1 + RRPONTSYD x-1000 | - | 1d | 2015-12-31 |
-| `netliq_z13` | research | risk_off | 10 | `z <= -1` | `z <= -0.5` | pctdiff | 13 | WALCL + WTREGEN x-1 + RRPONTSYD x-1000 | - | 1d | 2015-12-31 |
-| `dvol_d13` | research | long | 12 | `pct <= 0.2` | `pct <= 0.3` | diff | 13 | BTC | - | 0d | 2022-06-22 |
-| `vix_d12` | research | risk_off | 12 | `pct >= 0.9` | `pct >= 0.8` | diff | 12 | VIXCLS | - | 1d | 2015-12-31 |
-| `realyield_d13` | research | risk_off | 10 | `pct >= 0.9` | `pct >= 0.8` | diff | 13 | DFII5 | - | 1d | 2015-12-31 |
+| signal | tab | book | H | trigger | warning from | transform | lookback | sources | seeded from | readable lag | gauge from | first graded |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `put_call_z6` **(disabled)** | main | risk_off | 8 | `z >= 2` | `z >= 1` | zroll_clip | 6 | _(no feed)_ | - | - | 2015-01-01 | - |
+| `iorb_vol` | main | two_sided | 2 | `buy pct <= 0.4 (2w, traded 2w later); sell pct >= 0.9 (2w); between: hold` | `good < 0.6; hold < 0.8; risk < 0.9` | vol_scaled | 12 | SOFR + IORB x-1 | IORB | 1d / 0d | 2015-01-01 | 2023-10-27 |
+| `nfci_z52` | main | risk_off | 4 | `pct >= 0.8` | `pct >= 0.7` | zroll_clip | 52 | NFCI | - | 5d | 2015-01-01 | 2015-12-31 |
+| `realyield_vol` | main | risk_off | 1 | `pct >= 0.9` | `pct >= 0.8` | vol_scaled | 12 | DFII5 | 5Y Real Yield | 1d | 2015-01-01 | 2015-12-31 |
+| `dxy_z52` | main | risk_off | 12 | `pct >= 0.9` | `pct >= 0.8` | zroll_clip | 52 | DXY | - | 0d | 2012-06-24 | 2015-01-01 |
+| `retail_accel` | main | risk_off | 5 | `pct >= 0.8` | `pct >= 0.7` | accel | 12 | RRSFS | - | month end + 16d | 2015-01-01 | 2015-12-31 |
+| `breakeven_level` **(disabled)** | main | risk_off | 1 | `pct >= 0.9` | `pct >= 0.8` | level | - | _(no feed)_ | - | - | 2015-01-01 | - |
+| `hyg_logd12` **(disabled)** | main | long | 12 | `z >= 2` | `z >= 1` | logdiff | 12 | _(no feed)_ | - | - | 2015-01-01 | - |
+| `ig10y_vol` | main | long | 1 | `pct <= 0.2` | `pct <= 0.3` | vol_scaled | 12 | BAMLC0A0CMEY + DGS10 x-1 | IG-10Y | 1d | 2015-01-01 | 2015-12-31 |
+| `puell_z6` **(disabled)** | main | long_short | 12 | `pct >= 0.9` | `pct >= 0.8` | zroll_clip | 6 | _(no feed)_ | - | - | 2015-01-01 | - |
+| `dxy_d12` | main | long | 12 | `z <= -1` | `z <= -0.5` | diff | 12 | DXY | - | 0d | 2015-01-01 | 2015-12-31 |
+| `ccc_d12` | main | long | 1 | `pct <= 0.2` | `pct <= 0.3` | diff | 12 | BAMLH0A3HYC | CCC OAS | 1d | 2015-01-01 | 2017-06-02 |
+| `nfci_d12` | main | long | 12 | `pct <= 0.2` | `pct <= 0.3` | diff | 12 | NFCI | - | 5d | 2015-01-01 | 2015-12-31 |
+| `ig_oas_d13` | research | long | 8 | `pct <= 0.2` | `pct <= 0.3` | diff | 13 | BAMLC0A0CM | IG OAS | 1d | 2015-01-01 | 2017-06-09 |
+| `hy10y_d12` | research | long | 12 | `pct <= 0.2` | `pct <= 0.3` | diff | 12 | BAMLH0A0HYM2EY + DGS10 x-1 | HY-10Y | 1d | 2015-01-01 | 2015-12-31 |
+| `netliq_pct13` | research | long | 10 | `pct >= 0.8` | `pct >= 0.7` | pctdiff | 13 | WALCL + WTREGEN x-1 + RRPONTSYD x-1000 | - | 1d | 2015-01-01 | 2015-12-31 |
+| `netliq_z13` | research | risk_off | 10 | `z <= -1` | `z <= -0.5` | pctdiff | 13 | WALCL + WTREGEN x-1 + RRPONTSYD x-1000 | - | 1d | 2015-01-01 | 2015-12-31 |
+| `dvol_d13` | research | long | 12 | `pct <= 0.2` | `pct <= 0.3` | diff | 13 | BTC | - | 0d | 2015-01-01 | 2022-06-22 |
+| `vix_d12` | research | risk_off | 12 | `pct >= 0.9` | `pct >= 0.8` | diff | 12 | VIXCLS | - | 1d | 2015-01-01 | 2015-12-31 |
+| `realyield_d13` | research | risk_off | 10 | `pct >= 0.9` | `pct >= 0.8` | diff | 13 | DFII5 | - | 1d | 2015-01-01 | 2015-12-31 |
 
 `vol_scaled` divides the change by its own rolling standard deviation over 52 weeks;
 `zroll_clip` is a rolling z over the lookback, clipped at +/- 3; `accel` is the change in
@@ -97,7 +103,7 @@ the 12-week log change. All three are the screen's transforms of the same name.
 
 **`realyield_vol`** -- EVALUATED ON FRIDAYS: the trigger is read once a week, on Friday's reading, as the screen's weekly rule did; the gauge stays daily. Set 2026-09-15 because on this row the Friday readings carried the screen's result (183x) where daily re-checking did not (95x). Screen: H1, pct_ge_90, Short / risk-off filter, 3.68x, 3.62%/wk in market, excess 15.4%, 6 trades, 83% hit -- the best short row on the screen. DFII5 serves full history so the seed contributes nothing; the splice check runs anyway to confirm FRED's series is the research column. Validation: transform corr 0.978, trigger agreement 0.77 with the feed firing 11 weeks the screen did not and never the reverse; six episodes each. On the workbook book (long by default, short for the hold) the screen's triggers make 185x against 9.9x buy and hold over 2018-2026 and the feed's Friday readings 183x, 95x on its daily positions, 38x with no short leg. The project's own plain-13-week variant sits on the research tab.
 
-**`dxy_z52`** -- Added 2026-09-15 as an important signal: SHORT when the percentile clears 0.90, hold 12 weeks, long otherwise. On that book the screen's own triggers make 1438x against 170x buy and hold over 2016-2026, but the feed's data only 140x on Friday readings and 86x on its daily positions -- 229x with no short leg. The feed and the screen agree on 83% of trigger weeks, and the weeks they disagree on are expensive to be short in; the rebuilt DXY (ECB fix) against the research column (NY close) is the likeliest cause and is not yet run down. THE ONE ROW WHERE THE FEED'S VERSION IS FAR BELOW THE SCREEN'S. It is the SAME series as dxy_d12 read on the opposite tail -- a surging dollar here, a falling one there -- so the two are one dollar block, not two confirmations. The DXY is rebuilt from ECB reference rates (see dxy_d12).
+**`dxy_z52`** -- RULE (user's, restated 2026-09-16): SHORT when the percentile clears 0.90, hold 12 weeks; LONG every other week. Unchanged -- what was wrong was not the rule but the triggers under it. TRIGGER FIX 2026-09-16: the percentile now expands from 2012-06-24, the first date of the screen's own column, instead of from the dashboard's 2015 start (`gauge_start`), and the DXY is fetched from 2011-06 so the 52-week window is full by then. The 2015 start fired 50 weeks against the screen's 38; all 12 extra weeks were marginal -- the screen's percentile 0.79-0.90 against the feed's 0.900-0.936 -- and they landed in 2020-2022, four of them shorting the Oct-Dec 2021 top. On the workbook book that cost 175x against 213x buy and hold. From 2012-06-24 the feed fires 39 weeks, agrees with the screen on 0.878 of them (2 screen-only, 3 feed-only, against 0 and 12 before), and makes 1192x. The screen's own triggers make 1797x on the same window; the residue is the ECB 16:00 fix against the research column's NY close. NOT the causes, each measured and ruled out: the research column is NOT shifted (its z52w_clip reproduces EXACTLY off its own price column at shift 0, 708 of 708 weeks), and `compute: weekly` made agreement worse, 0.725 against 0.760. FRAGILITY, on the record: the rule sits on a knife edge at 0.90, twelve weeks within 0.02 of the line swing it between 175x and 1192x, and the start-date surface is not monotone (2010-2014 all make 650x-1200x, 2000 and 2005 make 71x). 2012-06-24 is chosen because it is the screen's provenance, not because it is the best cell. It is the SAME series as dxy_d12 read on the opposite tail -- a surging dollar here, a falling one there -- so the two are one dollar block, not two confirmations. The DXY is rebuilt from ECB reference rates (see dxy_d12).
 
 **`retail_accel`** -- DIRECTION: a RISK-OFF filter -- long by default, sell for 5 weeks when the percentile reaches 0.80 (hold set to 5 weeks by instruction on 2026-09-15; the screen row was at 8). That IS the screen row: its "long short" book is long by default and flat for the hold, and reproduces the 78x exactly (dashboard_performance.py); read as an entry rule the same triggers give 0.09x. An earlier note here had that backwards. Nothing on this series survives multiple testing (smallest q 0.63, about 14 independent episodes since 2015). Treat as a gauge, not a finding. Validation against the screen's column is 0.56 on the transform and 0.37 on the trigger, and that is the research column's defect, not the feed's: it skipped 39% of its prints and carried no publication lag. TIMING: FRED dates the print at the first of the month it covers and releases it about 16 days after that month ends, so the value is about six weeks old on the day it can first be read. An earlier version of this feed applied a two-week lag and applied it in prints rather than days.
 
