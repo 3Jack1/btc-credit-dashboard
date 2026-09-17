@@ -1,0 +1,9 @@
+Item,Value
+Computed (UTC),2026-09-17 07:24
+Prices,Bitstamp daily closes to 2026-09-17; positions from dashboard_history.csv
+Accounting,"equity: rebalanced to a fixed fraction daily (dashboard scorer); equity v3: quantity fixed at entry (trade workbooks). Agree on long/flat, part on shorts"
+Return/wk,all weeks: equity^(1/weeks) - 1; in market: mean log return per week holding a position
+Excess,CAGR minus buy and hold's CAGR scaled to the same time in market
+Windows,Full = from the signal's first reading; 2020+ and 2023+ start at the later of that date and the signal's first reading. Section 2 uses the decision table's own dates
+Check,"screen or workbook triggers vs the dashboard's positions through the same weekly engine, same weeks, v3 accounting. Near 1.00 = the dashboard reproduces the tested rule"
+Candidates,"52 variants tried (reading day x short leg on/off). Kept only where they beat the wired rule on excess in the full window AND 2023+, on full-window equity, and make positive excess in both windows. 7 signals shown. The best of many is biased upward: candidates to examine, not findings. iorb_vol: not varied -- two-sided with action delays; its delay sweep is on its note puell_z6: not varied -- weekly Monday bars; its reading-day tests are on its note 11 variants qualified in all; the best per signal is shown."
