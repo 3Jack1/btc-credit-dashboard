@@ -1,0 +1,4 @@
+date,btc_snapshot_utc,btc_spot,btc_pc_oi,btc_pc_volume,btc_call_oi,btc_put_oi,btc_skew_25d,btc_atm_iv,btc_tenor_days,btc_tenor_lo,btc_tenor_lo_days,btc_tenor_hi,btc_tenor_hi_days,btc_interp_weight,btc_total_oi,btc_n_instruments,spy_snapshot_utc,spy_session_date,spy_pc_volume,spy_call_volume,spy_put_volume,spy_n_expiries,spy_expiry_first,spy_expiry_last
+2026-09-10,2026-09-10T09:00:04Z,78190.36,0.5477,1.2936,,,-0.725,38.043,30,2026-10-02,21.96,2026-10-30,49.96,0.2872,438538.0,942,,,,,,,,
+2026-09-15,2026-09-15T08:26:02Z,76759.39,0.5521,0.3783,269815.2,148952.8,0.814,37.384,30,2026-10-02,16.98,2026-10-30,44.98,0.4649,418768.0,894,2026-09-15T08:26:02Z,2026-09-14,1.2968,1061313.0,1376297.0,6.0,2026-09-15,2026-09-22
+2026-09-18,2026-09-18T02:01:45Z,77151.71,0.5652,0.7696,281834.5,159279.1,1.436,32.392,30,2026-10-09,21.25,2026-10-30,42.25,0.4167,441113.6,930,2026-09-18T02:01:45Z,2026-09-17,0.8091,1809977.0,1464529.0,6.0,2026-09-18,2026-09-25

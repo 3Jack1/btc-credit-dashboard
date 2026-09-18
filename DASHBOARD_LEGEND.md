@@ -23,6 +23,7 @@ the band one step short of the trigger is the warning band. A trigger starts a h
 | `long_short` | short | long for H weeks | short | approaching | buy |
 | `overlay` | long | SHORT while its short leg holds, else FLAT while its flat leg holds | buy | high risk | sell / flat |
 | `two_sided` | the last side taken | long for its hold at the buy tail, short for its hold at the sell tail, each traded after its own delay | buy / good / hold | risk | short |
+| `watch` | none | no rule: the reading, its percentile and z, for data with no tested rule (the put/call ratios) | no rule | - | - |
 
 The warning band begins 0.1 short of a percentile trigger and 0.5 short of a
 z trigger unless a signal overrides it. The percentile is the gauge and the trigger is one
@@ -65,6 +66,10 @@ upper tail, and on the dollar's 52-week z it moved twelve borderline weeks acros
 | `dvol_d13` | research | long | 12 | `pct <= 0.2` | `pct <= 0.3` | diff | 13 | BTC | - | 0d | 2015-01-01 | 2022-06-22 |
 | `vix_d12` | research | risk_off_flat | 12 | `pct >= 0.9` | `pct >= 0.8` | diff | 12 | VIXCLS | - | 1d | 2015-01-01 | 2015-12-31 |
 | `realyield_d13` | research | risk_off | 10 | `pct >= 0.9` | `pct >= 0.8` | diff | 13 | DFII5 | - | 1d | 2015-01-01 | 2015-12-31 |
+| `spx_pc_vol` | data | watch | - | `none -- data only` | `-` | level | - | spx_volume | - | 1d | 2015-01-01 | 2020-10-06 |
+| `spx_pc_oi` | data | watch | - | `none -- data only` | `-` | level | - | spx_oi | - | 1d | 2015-01-01 | 2020-10-06 |
+| `btc_pc_oi` | data | watch | - | `none -- data only` | `-` | level | - | btc_pc_oi | - | 0d | 2015-01-01 | - |
+| `btc_pc_vol` | data | watch | - | `none -- data only` | `-` | level | - | btc_pc_volume | - | 0d | 2015-01-01 | - |
 
 `vol_scaled` divides the change by its own rolling standard deviation over 52 weeks;
 `pctrank` is the expanding rank of the level itself, and its trigger reads a percentile OF that rank.
@@ -147,3 +152,11 @@ the 12-week log change. All three are the screen's transforms of the same name.
 **`vix_d12`** -- FIXED COINS, AS PUBLISHED (2026-09-17): 131.13x against 177.8x buy and hold from 2015-12-31 (0.74x B&H; resized daily 131.13x); 2023+ 2.77x (0.60x B&H); excess +0.322; max drawdown -66%; 15 trades. PRE-SWITCH FIGURES: the figures that follow in this note were written before the dashboard switched to fixed coins on 2026-09-17 and are RESIZED to a fixed fraction of equity unless marked v3, qty or fixed coins; long-only figures are the same either way. The Performance tab shows both accountings. SHORTS REMOVED 2026-09-17, by instruction: long by default, FLAT for the 12-week hold (was SHORT). On fixed coins the short leg was wiped out: the 2020-10-28 short ran into BTC +129% by its exit (+206% at the peak) and lost 100%, and the 2024-08-05 short (+118%) would have done the same again. Without the shorts: 130.9x against 177.4x buy and hold from 2015-12-31 -- the variant the candidates section had found. The former short leg is on the Performance tab's short-legs section. SUBSTITUTE. The tested flag is MOVE 12w change top decile, which lifts P(drawdown) from 0.298 to 0.464 across 19 episodes. MOVE is licensed; VIXCLS correlates about 0.60 with it and tested weaker.
 
 **`realyield_d13`** -- FIXED COINS, AS PUBLISHED (2026-09-17): 45.54x against 177.8x buy and hold from 2015-12-31 (0.26x B&H; resized daily 141.79x); 2023+ 0.19x (0.04x B&H); excess -0.166; max drawdown -94%; 19 trades. PRE-SWITCH FIGURES: the figures that follow in this note were written before the dashboard switched to fixed coins on 2026-09-17 and are RESIZED to a fixed fraction of equity unless marked v3, qty or fixed coins; long-only figures are the same either way. The Performance tab shows both accountings. This project's own short-table pick: 2.43%/wk in market against a 0.99% baseline, 3.95x, 8 trades, 80 weeks in market, but only 4 episodes and it FAILED the drawdown test at q 1.000. A return-side short, not a risk detector.
+
+**`spx_pc_vol`** -- CBOE daily market statistics, SPX + SPXW options, puts over calls by contract volume, recomputed from the counts (CBOE's stated ratio is 2dp). History from 2019-10-07, the first day CBOE serves -- one trading day after its static archive (data/cboe/cboe_pcr_daily.csv) ends -- so the percentile ranks against every session since then. A session is read only once it closed four hours ago, and a volume under a fifth of the trailing 21-session median is dropped: CBOE files a closed market too (2025-01-09, 1% of normal volume). Chosen over SPY from Yahoo: SPY option chains are a snapshot with no history, so its percentile would need a year of daily snapshots, and SPX IS the S&P 500. 2019-10 to 2026-09: median 1.40, range 0.77 to 2.71. SPX trades heavy index puts as hedges, so its ratio sits well above 1; read it against its own history.
+
+**`spx_pc_oi`** -- The same CBOE file, puts over calls by open interest -- positioning carried, not the day's flow, so it moves slowly (about 1.40 in 2026-09). History from 2019-10-07.
+
+**`btc_pc_oi`** -- Deribit BTC options, all expiries, puts over calls by open interest, from the daily snapshot (src/make_options_snapshot.py, 08:00 UTC = 16:00 Perth, scheduled 2026-09-18). DERIBIT KEEPS NO PUT/CALL HISTORY: the snapshot file is the only record, it began 2026-09-10 with gaps until it was scheduled, and every missed day is lost for good. The percentile reads nothing until a year of readings exists.
+
+**`btc_pc_vol`** -- Deribit BTC options, puts over calls by trailing 24-hour volume, same snapshot and same caveat: no history before 2026-09-10 and none to fetch. Far noisier than the open-interest ratio -- one block trade moves it (0.38 to 1.29 in the first readings).
