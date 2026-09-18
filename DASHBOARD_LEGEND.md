@@ -69,7 +69,7 @@ upper tail, and on the dollar's 52-week z it moved twelve borderline weeks acros
 | `spx_pc_vol` | data | watch | - | `none -- data only` | `-` | level | - | spx_volume | - | 1d | 2015-01-01 | 2020-10-06 |
 | `spx_pc_oi` | data | watch | - | `none -- data only` | `-` | level | - | spx_oi | - | 1d | 2015-01-01 | 2020-10-06 |
 | `btc_pc_oi` | data | watch | - | `none -- data only` | `-` | level | - | btc_pc_oi | - | 0d | 2015-01-01 | - |
-| `btc_pc_vol` | data | watch | - | `none -- data only` | `-` | level | - | btc_pc_volume | - | 0d | 2015-01-01 | - |
+| `btc_pc_vol` | data | watch | - | `none -- data only` | `-` | level | - | btc | - | 0d | 2015-01-01 | 2020-09-29 |
 
 `vol_scaled` divides the change by its own rolling standard deviation over 52 weeks;
 `pctrank` is the expanding rank of the level itself, and its trigger reads a percentile OF that rank.
@@ -159,4 +159,4 @@ the 12-week log change. All three are the screen's transforms of the same name.
 
 **`btc_pc_oi`** -- Deribit BTC options, all expiries, puts over calls by open interest, from the daily snapshot (src/make_options_snapshot.py, 08:00 UTC = 16:00 Perth, scheduled 2026-09-18). DERIBIT KEEPS NO PUT/CALL HISTORY: the snapshot file is the only record, it began 2026-09-10 with gaps until it was scheduled, and every missed day is lost for good. The percentile reads nothing until a year of readings exists.
 
-**`btc_pc_vol`** -- Deribit BTC options, puts over calls by trailing 24-hour volume, same snapshot and same caveat: no history before 2026-09-10 and none to fetch. Far noisier than the open-interest ratio -- one block trade moves it (0.38 to 1.29 in the first readings).
+**`btc_pc_vol`** -- Deribit BTC options, puts over calls by volume over the 24 hours to 08:00 UTC (Deribit's settlement hour), REBUILT FROM DERIBIT'S TRADE HISTORY back to 2019-10-01 (2026-09-18): Deribit keeps no put/call history but keeps every trade, and volume by side is a sum of trades. Every BTC option trade in the window from history.deribit.com, cached in data/deribit/btc_option_volume_daily.csv (2,544 days, first build 56 minutes, then one day per run). The same quantity as the daily snapshot's btc_pc_volume: 0.7682 from trades against the snapshot's 0.7696 on the one exact window checked. Median 0.76, 1st to 99th percentile 0.33 to 1.90. Noisy day to day -- one block trade moves it. The open-interest ratio CANNOT be rebuilt this way: a trade does not say whether it opens or closes a position, and no free OI history exists.
