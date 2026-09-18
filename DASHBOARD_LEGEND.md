@@ -103,6 +103,7 @@ the 12-week log change. All three are the screen's transforms of the same name.
 | column | meaning |
 |---|---|
 | `run_utc / as_of / vintage` | `live` rows were written on the day and could only see published data; `backfill` rows were reconstructed later from today's series -- publication timing respected, revisions not |
+| `filled_later` | on a `live` row, the signals that did not exist when the row was written; their cells were filled later from the backfill, like a `backfill` row. Everything else on the row, the counts included, is as recorded on the day |
 | `<signal>_value / _chg / _pct / _z` | the inputs, as in the state file |
 | `<signal>_band / _position / _last_print` | the call, and the print it was made from |
 | `n_sell / n_high_risk / n_buy / n_approaching` | counts across the MAIN tab: risk-off signals in their hold or one band short of it, long signals likewise. Counts, not a score |
