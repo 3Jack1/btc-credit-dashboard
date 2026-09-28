@@ -86,6 +86,7 @@ the 12-week log change. All three are the screen's transforms of the same name.
 | `run_utc / as_of` | when the script ran, and the business day the row describes |
 | `signal / label / tab / book` | identity; `tab` is main or research, `book` is section 1 |
 | `horizon_weeks / condition` | the hold H and the trigger, as tested |
+| `gauge_kind` | which gauge the rule is read on, `pct` or `z` -- the one the sheet shows in its Gauge column. Stated by the rule rather than guessed from the trigger text, which a two-sided rule begins with its buy leg |
 | `value` | the raw series that day, after scaling, splicing and publication timing |
 | `chg` | after the transform -- the quantity the gauge ranks |
 | `pct` | expanding percentile of `chg` from 2015, using history to that day only |
