@@ -50,7 +50,7 @@ upper tail, and on the dollar's 52-week z it moved twelve borderline weeks acros
 | `nfci_z52` | research | risk_off | 4 | `pct >= 0.8` | `pct >= 0.7` | zroll_clip | 52 | NFCI | - | 5d | 2012-07-01 | 2015-01-01 |
 | `realyield_vol` | main | risk_off | 1 | `pct >= 0.9` | `pct >= 0.8` | vol_scaled | 12 | DFII5 | 5Y Real Yield | 1d | 2015-01-01 | 2015-12-31 |
 | `dxy_z52` | main | risk_off | 12 | `pct >= 0.9` | `pct >= 0.8` | zroll_clip | 52 | DXY | - | 0d | 2012-06-24 | 2015-01-01 |
-| `retail_accel` | main | risk_off | 5 | `pct >= 0.8` | `pct >= 0.7` | accel | 12 | RRSFS | - | month end + 16d | 2015-01-01 | 2015-12-31 |
+| `retail_accel` | research | risk_off | 5 | `pct >= 0.8` | `pct >= 0.7` | accel | 12 | RRSFS | - | month end + 16d | 2015-01-01 | 2015-12-31 |
 | `breakeven_level` **(disabled)** | main | risk_off | 1 | `pct >= 0.9` | `pct >= 0.8` | level | - | _(no feed)_ | - | - | 2015-01-01 | - |
 | `hyg_logd12` **(disabled)** | main | long | 12 | `z >= 2` | `z >= 1` | logdiff | 12 | _(no feed)_ | - | - | 2015-01-01 | - |
 | `ig10y_vol` | main | long | 1 | `pct <= 0.2` | `pct <= 0.3` | vol_scaled | 12 | BAMLC0A0CMEY + DGS10 x-1 | IG-10Y | 1d | 2015-01-01 | 2015-12-31 |
