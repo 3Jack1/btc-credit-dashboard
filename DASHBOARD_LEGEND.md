@@ -44,6 +44,7 @@ upper tail, and on the dollar's 52-week z it moved twelve borderline weeks acros
 
 | signal | tab | book | H | trigger | warning from | transform | lookback | sources | seeded from | readable lag | gauge from | first graded |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `main_combo` | combo | combo | - | `long at >= 6 of 12 votes, else short` | `5 votes (approaching)` | - | - | _(no feed)_ | - | - | 2015-01-01 | 2015-01-01 |
 | `put_call_z6` **(disabled)** | secondary | risk_off | 8 | `z >= 2` | `z >= 1` | zroll_clip | 6 | _(no feed)_ | - | - | 2015-01-01 | - |
 | `iorb_vol` | main | two_sided | 2 | `buy pct <= 0.4 (2w, traded 2w later); sell pct >= 0.9 (2w); between: hold` | `good < 0.6; hold < 0.8; risk < 0.9` | vol_scaled | 12 | SOFR + IORB x-1 | IORB | 1d / 0d | 2015-01-01 | 2023-10-27 |
 | `wei_d2` | main | long_short | 12 | `pct >= 0.8` | `pct >= 0.7` | diff | 2 | WEI | - | 5d | 2009-10-23 | 2015-01-01 |
@@ -121,6 +122,8 @@ the 12-week log change. All three are the screen's transforms of the same name.
 | `n_sell / n_high_risk / n_buy / n_approaching` | counts across the MAIN tab, secondary rows included: risk-off signals in their hold or one band short of it, long signals likewise. Counts, not a score |
 
 ## 4. Caveats carried on individual signals
+
+**`main_combo`** -- By request 2026-10-21: the twelve main rules as one vote count -- the 12-signal combo (config/combo_legs_12_research.csv) on the dashboard's own daily positions. A long rule votes while its long hold runs, SOFR-IORB while its buy hold runs, a risk-off rule while it is quiet and has a reading. LONG at 6 or more votes, SHORT below (flat before 2018, as every row). The legs are listed, not "whatever is on the main tab", so moving a row does not silently change this rule.
 
 **`put_call_z6`** -- NOT PUBLISHED (no feed), so not on the Performance tab. PRE-SWITCH FIGURES: the figures that follow in this note are the screen's, RESIZED weekly. Screen: H8, z_ge_2, Short / risk-off filter, 2.53x, 1.94%/wk in market. TESTED, and it does not generalise. On the screen's own input (the local Put Call Ratio column, 2013+) it looks strong: fires 8 weeks, P(8w drawdown) 0.625 against 0.323, forward 8w return -25.0% against +9.8%, shift-null p 0.047 -- but that is 8 isolated weeks in 13 years, and on 2016+ alone it is 5 weeks at p 0.123. It does NOT replicate on CBOE history (data/cboe/, 2003-2019): on CBOE total put/call the sign REVERSES, P(DD) 0.167 against 0.368 and a +58.8% forward return. The local column is not a CBOE series (best match CBOE total at Friday close, correlation 0.78). Left disabled on the evidence, not only for want of a feed. Condition reading: z_ge_2 is the expanding z of the 6-week rolling z; the rolling z itself can barely reach 2 on 6 points.
 
